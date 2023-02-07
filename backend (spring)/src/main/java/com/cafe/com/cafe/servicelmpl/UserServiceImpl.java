@@ -25,10 +25,12 @@ public class UserServiceImpl implements UserService {
         try {
             if (validateSignUpMap(requestMap)) {
                 User user = userDao.findByEmailId(requestMap.get("email"));
+                // if user with the given email is not in the db, save it to the db
                 if (Objects.isNull(user)) {
                     userDao.save(getUserFromMap(requestMap));
                     return CafeUtils.getResponseEntity(CafeConstants.SUCCESSFULLY_REGISTERED, HttpStatus.OK);
                 } else {
+                    // account already exists
                     return CafeUtils.getResponseEntity(CafeConstants.DUPLICATE_ACCOUNT, HttpStatus.BAD_REQUEST);
                 }
             } else {
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // checks if sign up information is valid
     private boolean validateSignUpMap(Map<String, String> requestMap) {
         if (requestMap.containsKey("name") && requestMap.containsKey("contactNumber")
                 && requestMap.containsKey("email") && requestMap.containsKey("password")) {
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    // set the values for the sign up
     private User getUserFromMap(Map<String, String> requestMap) {
         User user = new User();
         user.setName(requestMap.get("name"));
