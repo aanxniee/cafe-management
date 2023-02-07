@@ -17,11 +17,12 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         log.info("Inside signup: ", requestMap);
         if (validateSignUpMap(requestMap)) {
-            
+
         }
         else {
             return CafeUtils.getResponseEntity(CafeConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
         }
+        return null;
     }
 
     private boolean validateSignUpMap(Map<String, String> requestMap) {
