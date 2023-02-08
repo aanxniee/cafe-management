@@ -3,6 +3,7 @@ package com.cafe.com.cafe.JWT;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -10,12 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@Slf4j
 @Service
 public class JwtUtil {
     private String secret = "aanxniee";
 
     // retrieves username from token
-    public String extractUserName(String token) {
+    public String extractUsername(String token) {
         return extractClaims(token, Claims::getSubject);
     }
 
@@ -41,12 +43,14 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder()
+        log.info("inside createToken");
+        String jws = Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // token is valid for 10 hours
                 .signWith(SignatureAlgorithm.HS256, secret).compact(); // signature section of the token
+        return jws;
     }
 
     public String generateToken(String username, String role) {
@@ -56,7 +60,7 @@ public class JwtUtil {
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUserName(token);
+        final String username = extractUsername(token);
         // if the username is valid and the token is not expired, it is valid
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }

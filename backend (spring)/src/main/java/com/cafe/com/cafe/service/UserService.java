@@ -6,4 +6,7 @@ import java.util.Map;
 public interface UserService {
     // user sign up api
     ResponseEntity<String> signUp(Map<String, String> requestMap);
+
+    // user login api
+    ResponseEntity<String> login(Map<String, String> requestMap);
 }
