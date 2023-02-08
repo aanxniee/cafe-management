@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
@@ -22,7 +23,12 @@ public class SecurityConfig {
     @Autowired
     CustomerUsersDetailsService customerUserDetailsService;
 
+    @Autowired
+    JwtFilter jwtFilter;
+
     @Bean
+    // authenticates username and password, implements authentication logic
+    // uses Service to find username and validates password using Encoder
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(customerUserDetailsService);
@@ -35,17 +41,20 @@ public class SecurityConfig {
                 .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                 .and()
                 .csrf().disable()
+                // by pass all requests with the following paths
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/user/login/**").permitAll()
                         .requestMatchers("/user/signup/**").permitAll()
                         .requestMatchers("/user/forgotPassword/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated() // otherwise, require authentication
                 )
                 .exceptionHandling()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        // adds our jwtFilter before UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         http.authenticationProvider(authenticationProvider());
         return http.build();
     }
@@ -59,6 +68,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

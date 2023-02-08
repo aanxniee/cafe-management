@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class JwtUtil {
     private String secret = "aanxniee";
 
     // retrieves username from token
-    private String extractUserName(String token) {
+    public String extractUserName(String token) {
         return extractClaims(token, Claims::getSubject);
     }
 
