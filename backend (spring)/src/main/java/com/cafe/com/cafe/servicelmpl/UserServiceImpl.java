@@ -8,6 +8,7 @@ import com.cafe.com.cafe.modal.User;
 import com.cafe.com.cafe.dao.UserDao;
 import com.cafe.com.cafe.service.UserService;
 import com.cafe.com.cafe.utils.CafeUtils;
+import com.cafe.com.cafe.utils.EmailUtils;
 import com.cafe.com.cafe.wrapper.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JwtFilter jwtFilter;
+
+    @Autowired
+    EmailUtils emailUtils;
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
@@ -130,6 +134,7 @@ public class UserServiceImpl implements UserService {
                 if (!optional.isEmpty()) {
                     // call update status api on the specified user
                     userDao.updateStatus(requestMap.get("status"), Integer.parseInt(requestMap.get("id")));
+                    sendMailToAllAdmin(requestMap.get("status"), optional.get().getEmail(), userDao.getAllAdmin());
                     return CafeUtils.getResponseEntity(CafeConstants.UPDATE_SUCCESSFUL, HttpStatus.OK);
                 } else {
                     return CafeUtils.getResponseEntity(CafeConstants.INVALID_USER, HttpStatus.OK);
@@ -141,6 +146,15 @@ public class UserServiceImpl implements UserService {
             ex.printStackTrace();
         }
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private void sendMailToAllAdmin(String status, String user, List<String> allAdmin) {
+        allAdmin.remove(jwtFilter.getCurrentUser());
+        if (status != null && status.equalsIgnoreCase("true")) {
+            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(), "Account Approved", "USER: - " + user + " \n is approved by \nADMIN: - " + jwtFilter.getCurrentUser(), allAdmin);
+        } else {
+            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(), "Account Disabled", "USER: - " + user + " \n is disabled by \nADMIN: - " + jwtFilter.getCurrentUser(), allAdmin);
+        }
     }
 
 
