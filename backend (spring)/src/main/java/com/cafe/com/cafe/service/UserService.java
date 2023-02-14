@@ -3,7 +3,6 @@ package com.cafe.com.cafe.service;
 import com.cafe.com.cafe.modal.User;
 import com.cafe.com.cafe.wrapper.UserWrapper;
 import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +15,7 @@ public interface UserService {
 
     // user retrieval api
     ResponseEntity<List<UserWrapper>> getAllUser();
+
+    // status update api
+    ResponseEntity<String> update(Map<String, String> requestMap);
 }
