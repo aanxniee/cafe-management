@@ -43,7 +43,6 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        log.info("inside createToken");
         String jws = Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)

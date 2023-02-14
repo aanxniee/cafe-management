@@ -1,6 +1,10 @@
 package com.cafe.com.cafe.service;
 
+import com.cafe.com.cafe.modal.User;
+import com.cafe.com.cafe.wrapper.UserWrapper;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -9,4 +13,6 @@ public interface UserService {
 
     // user login api
     ResponseEntity<String> login(Map<String, String> requestMap);
+
+    ResponseEntity<List<UserWrapper>> getAllUser();
 }
