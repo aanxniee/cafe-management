@@ -112,6 +112,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<List<UserWrapper>> getAllUser() {
         try {
+            // only allow retrieval is the user is an admin
             if (jwtFilter.isAdmin()) {
                 return new ResponseEntity<>(userDao.getAllUser(), HttpStatus.OK);
             } else {

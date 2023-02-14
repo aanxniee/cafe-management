@@ -42,7 +42,7 @@ public class UserRestImpl implements UserRest {
     @Override
     public ResponseEntity<List<UserWrapper>> getAllUser() {
         try {
-            return userService.getAllUser();
+            return userService.getAllUser(); // retrieves all users in the management system
         } catch (Exception ex) {
             ex.printStackTrace();
         }

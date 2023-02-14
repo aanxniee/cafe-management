@@ -14,5 +14,6 @@ public interface UserService {
     // user login api
     ResponseEntity<String> login(Map<String, String> requestMap);
 
+    // user retrieval api
     ResponseEntity<List<UserWrapper>> getAllUser();
 }

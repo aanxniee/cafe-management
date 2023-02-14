@@ -19,10 +19,4 @@ public class UserWrapper {
         this.contactNumber = contactNumber;
         this.status = status;
     }
-
-
-
-
-
-
 }
