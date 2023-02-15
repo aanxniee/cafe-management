@@ -10,4 +10,5 @@ public class CafeConstants {
     public static final String UNAUTHORIZED_ACCESS = "Unauthorized access!";
     public static final String INVALID_USER = "This user does not exist.";
     public static final String UPDATE_SUCCESSFUL = "User status has been updated successfully!";
+    public static final String TRUE = "TRUE";
 }

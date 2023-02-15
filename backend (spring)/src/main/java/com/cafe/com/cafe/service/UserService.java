@@ -18,4 +18,6 @@ public interface UserService {
 
     // status update api
     ResponseEntity<String> update(Map<String, String> requestMap);
+
+    ResponseEntity<String> checkToken();
 }
