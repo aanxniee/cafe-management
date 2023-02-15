@@ -162,4 +162,24 @@ public class UserServiceImpl implements UserService {
         return CafeUtils.getResponseEntity(CafeConstants.TRUE, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
+       try {
+            User userObject = userDao.findByEmail(jwtFilter.getCurrentUser());
+
+            if (!userObject.equals(null)) {
+                if (userObject.getPassword().equals(requestMap.get("oldPassword"))) {
+                    userObject.setPassword(requestMap.get("newPassword"));
+                    userDao.save(userObject);
+                    return CafeUtils.getResponseEntity(CafeConstants.PASSWORD_CHANGED, HttpStatus.OK);
+                }
+                return CafeUtils.getResponseEntity(CafeConstants.INCORRECT_OLD_PASSWORD, HttpStatus.BAD_REQUEST);
+            }
+            return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+       } catch (Exception ex) {
+           ex.printStackTrace();
+       }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

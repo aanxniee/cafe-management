@@ -16,4 +16,6 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Transactional // marks the start and end of a transaction --> modifying query method
     @Modifying
     Integer updateStatus(@Param("status") String status, @Param("id") Integer id);
+
+    User findByEmail(String email);
 }
