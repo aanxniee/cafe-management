@@ -1,11 +1,17 @@
 package com.cafe.com.cafe.service;
 
+import com.cafe.com.cafe.modal.Category;
+import com.cafe.com.cafe.rest.CategoryRest;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Map;
 
 public interface CategoryService {
 
-    // adds new item to the category
+    // adds new item to the category api
     ResponseEntity<String> addNewCategory(Map<String, String> requestMap);
+
+    // retrieves all items api
+    ResponseEntity<List<Category>> getAllCategory(String filterValue);
 }
