@@ -14,4 +14,7 @@ public interface CategoryService {
 
     // retrieves all items api
     ResponseEntity<List<Category>> getAllCategory(String filterValue);
+
+    // updates item api
+    ResponseEntity<String> updateCategory(Map<String, String> requestMap);
 }
