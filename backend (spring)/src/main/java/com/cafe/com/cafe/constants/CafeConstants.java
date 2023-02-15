@@ -13,4 +13,5 @@ public class CafeConstants {
     public static final String TRUE = "True";
     public static final String INCORRECT_OLD_PASSWORD = "The password you entered is incorrect.";
     public static final String PASSWORD_CHANGED = "Your password has been reset successfully.";
+    public static final String CHECK_EMAIL = "Check your email. We've sent you an email with instructions on how to reset your password.";
 }

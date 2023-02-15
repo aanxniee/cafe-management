@@ -10,6 +10,7 @@ import com.cafe.com.cafe.service.UserService;
 import com.cafe.com.cafe.utils.CafeUtils;
 import com.cafe.com.cafe.utils.EmailUtils;
 import com.cafe.com.cafe.wrapper.UserWrapper;
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -180,6 +181,21 @@ public class UserServiceImpl implements UserService {
        } catch (Exception ex) {
            ex.printStackTrace();
        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> forgotPassword(Map<String, String> requestMap) {
+        try {
+            User userObject = userDao.findByEmail(requestMap.get("email"));
+            if (!Objects.isNull(userObject) && !Strings.isNullOrEmpty(userObject.getEmail())) {
+                // send password change email to the user's email
+                emailUtils.forgotMail(userObject.getEmail(), "Reset your Lofi Cafe Password", userObject.getPassword());
+            }
+            return CafeUtils.getResponseEntity(CafeConstants.CHECK_EMAIL, HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
