@@ -6,13 +6,13 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import java.io.Serializable;
 
-@NamedQuery(name = "Category.getAllCategory", query = "select c from category c")
+@NamedQuery(name = "Category.getAllCategory", query = "select c from Category c")
 
 @Data
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "user")
+@Table(name = "category")
 public class Category implements Serializable {
     public static final long serialVersionUID = 1L;
 
