@@ -165,12 +165,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
        try {
+           // find the user by their email to change their password
             User userObject = userDao.findByEmail(jwtFilter.getCurrentUser());
-
             if (!userObject.equals(null)) {
+                // entered correct old password --> can change to new password
                 if (userObject.getPassword().equals(requestMap.get("oldPassword"))) {
                     userObject.setPassword(requestMap.get("newPassword"));
-                    userDao.save(userObject);
+                    userDao.save(userObject); // save the data to the db
                     return CafeUtils.getResponseEntity(CafeConstants.PASSWORD_CHANGED, HttpStatus.OK);
                 }
                 return CafeUtils.getResponseEntity(CafeConstants.INCORRECT_OLD_PASSWORD, HttpStatus.BAD_REQUEST);

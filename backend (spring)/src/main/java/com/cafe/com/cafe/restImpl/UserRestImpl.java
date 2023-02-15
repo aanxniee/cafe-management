@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +61,7 @@ public class UserRestImpl implements UserRest {
     @Override
     public ResponseEntity<String> checkToken() {
         try {
-            return userService.checkToken();
+            return userService.checkToken(); // checks if token is valid
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -72,7 +71,7 @@ public class UserRestImpl implements UserRest {
     @Override
     public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
         try {
-            return userService.changePassword(requestMap);
+            return userService.changePassword(requestMap); // updates the user's password
         } catch (Exception ex) {
             ex.printStackTrace();
         }

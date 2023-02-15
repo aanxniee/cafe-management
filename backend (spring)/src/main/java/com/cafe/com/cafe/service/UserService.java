@@ -21,5 +21,6 @@ public interface UserService {
 
     ResponseEntity<String> checkToken();
 
+    // change password api
     ResponseEntity<String> changePassword(Map<String, String> requestMap);
 }
