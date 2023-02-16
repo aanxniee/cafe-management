@@ -25,4 +25,7 @@ public interface ProductService {
     // retrieves products from a specified category api
     ResponseEntity<List<ProductWrapper>> getByCategory(Integer id);
 
+    // retrieves products by id api
+    ResponseEntity<ProductWrapper> getById(Integer id);
+
 }
