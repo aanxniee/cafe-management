@@ -6,8 +6,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import java.io.Serializable;
 
-// @NamedQuery(name = "Category.getAllCategory", query = "select c from Category c")
-
 @Data
 @Entity
 @DynamicInsert
