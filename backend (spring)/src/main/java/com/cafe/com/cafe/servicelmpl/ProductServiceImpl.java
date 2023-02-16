@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -87,5 +88,34 @@ public class ProductServiceImpl implements ProductService {
             ex.printStackTrace();
         }
         return new ResponseEntity<List<ProductWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> updateProduct(Map<String, String> requestMap) {
+        try {
+            // only admins can update products
+            if (jwtFilter.isAdmin()) {
+                if (validateProductMap(requestMap, true)) {
+                    // find the specified product
+                    Optional<Product> optional = productDao.findById(Integer.parseInt(requestMap.get("id")));
+                    if (!optional.isEmpty()) {
+                        Product product = getProductFromMap(requestMap, true);
+                        product.setStatus(optional.get().getStatus());
+                        productDao.save(product); // update to db
+                        return CafeUtils.getResponseEntity(CafeConstants.PRODUCT_UPDATED, HttpStatus.OK);
+                    }
+                    else {
+                        return CafeUtils.getResponseEntity(CafeConstants.INVALID_PRODUCT, HttpStatus.OK);
+                    }
+                }
+                return CafeUtils.getResponseEntity(CafeConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
+            }
+            else {
+                return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
