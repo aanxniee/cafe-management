@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
 import java.io.Serializable;
+
+// @NamedQuery(name = "Category.getAllCategory", query = "select c from Category c")
 
 @Data
 @Entity
@@ -25,7 +26,7 @@ public class Product implements Serializable {
 
     // many to one --> one row in a table is mapped to multiple rows in another table
     @ManyToOne(fetch = FetchType.LAZY) // lazy = fetch data when needed
-    @JoinColumn(name = "category_fk", nullable = false)
+    @JoinColumn(name = "category_fk", nullable = false) // connect to category table via foreign key
     private Category category;
 
     @Column(name = "description")
@@ -36,6 +37,4 @@ public class Product implements Serializable {
 
     @Column(name = "status")
     private String status;
-
-
 }
