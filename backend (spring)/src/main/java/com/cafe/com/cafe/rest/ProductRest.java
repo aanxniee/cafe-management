@@ -1,6 +1,5 @@
 package com.cafe.com.cafe.rest;
 
-import com.cafe.com.cafe.modal.Product;
 import com.cafe.com.cafe.wrapper.ProductWrapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,5 +20,8 @@ public interface ProductRest {
 
     @PostMapping(path = "/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id);
+
+    @PostMapping(path = "/updateStatus")
+    public ResponseEntity<String> updateStatus(@RequestBody(required = true) Map<String, String> requestMap);
 }
 
