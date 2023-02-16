@@ -1,6 +1,5 @@
 package com.cafe.com.cafe.service;
 
-import com.cafe.com.cafe.modal.Product;
 import com.cafe.com.cafe.wrapper.ProductWrapper;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
@@ -22,5 +21,8 @@ public interface ProductService {
 
     // updates a product's status api
     ResponseEntity<String> updateStatus(Map<String, String> requestMap);
+
+    // retrieves products from a specified category api
+    ResponseEntity<List<ProductWrapper>> getByCategory(Integer id);
 
 }

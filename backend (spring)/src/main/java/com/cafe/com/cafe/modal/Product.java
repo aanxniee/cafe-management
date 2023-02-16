@@ -9,6 +9,7 @@ import java.io.Serializable;
 // p.category.id --> category is an object, category.id is its attribute
 @NamedQuery(name = "Product.getAllProduct", query = "select new com.cafe.com.cafe.wrapper.ProductWrapper(p.id, p.name, p.description, p.price, p.status, p.category.id, p.category.name) from Product p")
 @NamedQuery(name = "Product.updateProductStatus", query = "update Product p set p.status=:status where p.id=:id")
+@NamedQuery(name = "Product.getProductByCategory", query = "select new com.cafe.com.cafe.wrapper.ProductWrapper(p.id, p.name) from Product p where p.category.id=:id and p.status='true'")
 
 @Data
 @Entity

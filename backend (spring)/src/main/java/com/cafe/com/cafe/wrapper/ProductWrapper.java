@@ -1,10 +1,8 @@
 package com.cafe.com.cafe.wrapper;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class ProductWrapper {
     private Integer id;
     private String name;
@@ -14,6 +12,12 @@ public class ProductWrapper {
     private Integer categoryId;
     private String categoryName;
 
+    // empty constructor
+    public  ProductWrapper() {
+
+    }
+
+    // overloaded constructor
     public ProductWrapper(Integer id, String name, String description, Integer price, String status, Integer categoryId, String categoryName) {
         this.id = id;
         this.name = name;
@@ -22,5 +26,11 @@ public class ProductWrapper {
         this.status = status;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+    }
+
+    // overloaded constructor
+    public ProductWrapper(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 }
