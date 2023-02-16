@@ -5,6 +5,7 @@ import com.cafe.com.cafe.modal.Category;
 import com.cafe.com.cafe.rest.ProductRest;
 import com.cafe.com.cafe.service.ProductService;
 import com.cafe.com.cafe.utils.CafeUtils;
+import com.cafe.com.cafe.wrapper.ProductWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +31,17 @@ public class ProductRestImpl implements ProductRest {
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    /*@Override
-    public ResponseEntity<List<Category>> getAllProducts(String filterValue) {
+    @Override
+    public ResponseEntity<List<ProductWrapper>> getAllProduct(String filterValue) {
         try {
-            return productService.getAllProducts(filterValue);
+            return productService.getAllProduct(filterValue);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Override
+    /*@Override
     public ResponseEntity<String> updateProduct(Map<String, String> requestMap) {
         return null;try {
             return productService.updateProduct(requestMap);

@@ -7,10 +7,14 @@ import com.cafe.com.cafe.modal.Category;
 import com.cafe.com.cafe.modal.Product;
 import com.cafe.com.cafe.service.ProductService;
 import com.cafe.com.cafe.utils.CafeUtils;
+import com.cafe.com.cafe.wrapper.ProductWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -73,5 +77,15 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(requestMap.get("description"));
         product.setPrice(Integer.parseInt(requestMap.get("price")));
         return product;
+    }
+
+    @Override
+    public ResponseEntity<List<ProductWrapper>> getAllProduct(String filterValue) {
+        try {
+            return new ResponseEntity<List<ProductWrapper>>(productDao.getAllProduct(), HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<ProductWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
