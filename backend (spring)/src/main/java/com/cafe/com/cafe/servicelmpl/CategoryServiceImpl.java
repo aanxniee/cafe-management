@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public ResponseEntity<String> addNewCategory(Map<String, String> requestMap) {
         try {
-            // only admins can add items
+            // only admins can add categories
             if (jwtFilter.isAdmin()) {
                 if (validateCategoryMap(requestMap, false)) {
                     categoryDao.save(getCategoryFromMap(requestMap, false)); // add to db
@@ -73,12 +73,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public ResponseEntity<List<Category>> getAllCategory(String filterValue) {
         try {
-            // returns all items within a category if the filter is valid
+            // returns all categories given a filter if the filter is valid
             if (!Strings.isNullOrEmpty(filterValue) && filterValue.equalsIgnoreCase("true")) {
                 log.info("Inside if: ");
                 return new ResponseEntity<List<Category>>(categoryDao.getAllCategory(), HttpStatus.OK);
             }
-            // return all items
+            // return all categories
             return new ResponseEntity<List<Category>>(categoryDao.findAll(), HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -89,10 +89,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public ResponseEntity<String> updateCategory(Map<String, String> requestMap) {
         try {
-            // only admins can update items
+            // only admins can update categories
             if (jwtFilter.isAdmin()) {
                 if (validateCategoryMap(requestMap, true)) {
-                    // find the specified item
+                    // find the specified category
                     Optional optional = categoryDao.findById(Integer.parseInt(requestMap.get("id")));
                     if (!optional.isEmpty()) {
                         categoryDao.save(getCategoryFromMap(requestMap, true)); // update to db

@@ -9,12 +9,12 @@ import java.util.Map;
 
 public interface CategoryService {
 
-    // adds new item to the category api
+    // adds new category to the category api
     ResponseEntity<String> addNewCategory(Map<String, String> requestMap);
 
-    // retrieves all items api
+    // retrieves all categories api
     ResponseEntity<List<Category>> getAllCategory(String filterValue);
 
-    // updates item api
+    // updates category api
     ResponseEntity<String> updateCategory(Map<String, String> requestMap);
 }
