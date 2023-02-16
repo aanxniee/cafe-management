@@ -1,7 +1,6 @@
 package com.cafe.com.cafe.restImpl;
 
 import com.cafe.com.cafe.constants.CafeConstants;
-import com.cafe.com.cafe.modal.Category;
 import com.cafe.com.cafe.rest.ProductRest;
 import com.cafe.com.cafe.service.ProductService;
 import com.cafe.com.cafe.utils.CafeUtils;
@@ -33,7 +32,7 @@ public class ProductRestImpl implements ProductRest {
     @Override
     public ResponseEntity<List<ProductWrapper>> getAllProduct(String filterValue) {
         try {
-            return productService.getAllProduct(filterValue);
+            return productService.getAllProduct(filterValue); // retrievals all products
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -43,7 +42,17 @@ public class ProductRestImpl implements ProductRest {
     @Override
     public ResponseEntity<String> updateProduct(Map<String, String> requestMap) {
         try {
-            return productService.updateProduct(requestMap);
+            return productService.updateProduct(requestMap); // updates a product
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> deleteProduct(Integer id) {
+        try {
+            return productService.deleteProduct(id); // deletes a product
         } catch (Exception ex) {
             ex.printStackTrace();
         }
