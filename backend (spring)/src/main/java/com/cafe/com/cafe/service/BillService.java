@@ -1,7 +1,8 @@
 package com.cafe.com.cafe.service;
 
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import java.util.Map;
 
-@Service
 public interface BillService {
+    ResponseEntity<String> generateReport(Map<String, Object> requestMap);
 }
