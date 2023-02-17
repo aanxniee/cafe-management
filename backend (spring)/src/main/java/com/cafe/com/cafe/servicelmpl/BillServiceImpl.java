@@ -4,6 +4,7 @@ import com.cafe.com.cafe.JWT.JwtFilter;
 import com.cafe.com.cafe.constants.CafeConstants;
 import com.cafe.com.cafe.dao.BillDao;
 import com.cafe.com.cafe.modal.Bill;
+import com.cafe.com.cafe.modal.Category;
 import com.cafe.com.cafe.service.BillService;
 import com.cafe.com.cafe.utils.CafeUtils;
 import com.itextpdf.text.*;
@@ -17,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -172,5 +175,23 @@ public class BillServiceImpl implements BillService {
                 requestMap.containsKey("paymentMethod") &&
                 requestMap.containsKey("productDetails") &&
                 requestMap.containsKey("totalAmount");
+    }
+
+    @Override
+    public ResponseEntity<List<Bill>> getBills() {
+        try {
+            List<Bill> list = new ArrayList<>();
+
+            if(jwtFilter.isAdmin()) {
+                list = billDao.getAllBills(); // admins can access all bills
+            }
+            else {
+                list = billDao.getBillByUserName(jwtFilter.getCurrentUser()); // users can only access the bills they created
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<List<Bill>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
