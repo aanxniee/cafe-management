@@ -14,4 +14,7 @@ public interface BillService {
 
     // retrieves all bills api
     ResponseEntity<List<Bill>> getBills();
+
+    // retrieves bills as a pdf (byte array) api
+    ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap);
 }

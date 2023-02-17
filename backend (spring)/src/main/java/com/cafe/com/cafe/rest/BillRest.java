@@ -17,4 +17,7 @@ public interface BillRest {
 
     @GetMapping(path = "/getBills")
     public ResponseEntity<List<Bill>> getBills();
+
+    @PostMapping(path = "/getPdf")
+    public ResponseEntity<byte[]> getPdf(@RequestBody(required = true) Map<String, Object> requestMap);
 }
