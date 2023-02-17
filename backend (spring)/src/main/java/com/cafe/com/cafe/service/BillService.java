@@ -17,4 +17,8 @@ public interface BillService {
 
     // retrieves bills as a pdf (byte array) api
     ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap);
+
+    // deletes a bill api
+    ResponseEntity<String> deleteBill(Integer id);
+
 }
