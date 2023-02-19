@@ -61,7 +61,7 @@ public class BillServiceImpl implements BillService {
 
                 // create pdf document using itextpdf
                 Document document = new Document();
-                PdfWriter.getInstance(document, new FileOutputStream(CafeConstants.STORE_LOCATION+"\\"+fileName+".pdf")); // path to the folder storing the bills
+                PdfWriter.getInstance(document, new FileOutputStream(CafeConstants.STORE_LOCATION+"/"+fileName+".pdf")); // path to the folder storing the bills
 
                 document.open(); // open pdf document for writing
                 setRectangleInPdf(document);
@@ -213,7 +213,7 @@ public class BillServiceImpl implements BillService {
             }
 
             // get the file path from the specified uid
-            String filePath = CafeConstants.STORE_LOCATION+"\\"+(String) requestMap.get("uuid")+".pdf";
+            String filePath = CafeConstants.STORE_LOCATION+"/"+(String) requestMap.get("uuid")+".pdf";
 
             if (CafeUtils.isFileExist(filePath)) {
                 byteArray = getByteArray(filePath);
