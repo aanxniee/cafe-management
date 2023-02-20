@@ -1,0 +1,181 @@
+* {
+  box-sizing: border-box;
+  background-color: #82716D;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  display: flex;
+  background-color: #82716D;
+  padding: 3%;
+}
+
+li {
+  color: #EBEAEA;
+  text-align: center;
+  transition: all .3s ease-in-out;
+}
+
+li:hover {
+  transform: scale(1.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all .3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side {
+  flex: 30%;
+  background-color: #EBEAEA;
+  padding: 20px;
+}
+
+.main {
+  flex: 70%;
+  background-color: #EBEAEA;
+  padding: 15px;
+}
+
+.footer {
+  padding: 10px;
+  text-align: center;
+  color: #EBEAEA;
+  background: #82716D;
+}
+
+.column {
+  flex: 25%;
+  padding: 20px;
+}
+
+.wrapper {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background-color: #82716D;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+}
+
+ul li a {
+  padding: 1em;
+}
+
+a.logo {
+  margin-right: auto;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: #EBEAEA;
+  position: relative;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+}
+
+.bg-image {
+  background-image: url("../../assets/img/cover.svg");
+  height: 93.9%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    height: auto;
+  }
+  
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  a.logo {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-right: 0px;
+  }
+  
+  ul {
+    width: 100%;
+    margin-bottom: 1em;
+    justify-content: space-between;
+  }
+  
+  ul li a {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  a.logo {
+    margin: 1.5em;
+  }
+  
+  ul {
+    flex-direction: column;
+  }
+  
+  ul li {
+    margin: 0.3em;
+    text-align: center;
+  }
+  
+  ul li a {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .column {
+    flex: 50%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .row, .navbar {   
+    flex-direction: column;
+  }
+}
