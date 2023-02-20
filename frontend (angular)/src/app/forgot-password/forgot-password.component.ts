@@ -46,7 +46,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.responseMessage = error.error?.message;
       }
       else {
-        this.responseMessage = GlobalConstants.error;
+        this.responseMessage = GlobalConstants.genericError;
       }
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })

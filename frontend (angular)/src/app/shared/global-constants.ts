@@ -1,6 +1,6 @@
 export class GlobalConstants {
     // message
-    public static generateError:string = "Something went wrong. Please try again later.";
+    public static genericError:string = "Something went wrong. Please try again later.";
 
     // regex
     public static nameRegex:string = "[a-zA-Z0-9 ]*";
