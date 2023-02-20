@@ -16,15 +16,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LoginComponent } from './login/login.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
-  textColor: "#FFFFFF",
+  textColor: "#EBEAEA",
   textPosition: "center-center",
-  bgsColor: "#111",
-  fgsColor: "#111",
+  bgsColor: "#EBEAEA",
+  fgsColor: "#EBEAEA",
   fgsType:SPINNER.ballSpinClockwise,
-  fgsSize:100,
+  fgsSize:30,
   hasProgressBar:false
 }
 
@@ -36,7 +37,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AppHeaderComponent,
     AppSidebarComponent,
     SignupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    LoginComponent
    ],
   imports: [
     BrowserModule,
