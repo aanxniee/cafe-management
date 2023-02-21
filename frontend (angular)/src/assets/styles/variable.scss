@@ -30,20 +30,20 @@ $custom-typography: mat-typography-config(
 
 $topbar: #2196f3;
 $sidebar: #fff;
-$sidebar-white: #e5edef;
-$sidebar-alt: #f2f6f8;
-$bodycolor: #eef5f9;
+$sidebar-white: #fff;
+$sidebar-alt: #fff;
+$bodycolor: #fff;
 $headingtext: #455a64;
 $bodytext: #67757c;
-$sidebar-text: #607d8b;
+$sidebar-text: #fff;
 $sidebar-icons: #99abb4;
 
 $font-16: 16px;
 
-$light-text: #a6b7bf;
-$themecolor: #82716D;
-$themecolor-alt: #7b1fa2;
-$themecolor-dark: #028ee1;
+$light-text: #fff;
+$themecolor: #a1887f;
+$themecolor-alt: #a1887f;
+$themecolor-dark: #6d4c41;
 
 /*bootstrap Color*/
 $danger: #fc4b6c;
@@ -51,8 +51,7 @@ $success: #26c6da;
 $warning: #ffb22b;
 $primary: #7460ee;
 $info: #7b1fa2;
-// $inverse: #2f3d4a;
-$inverse: white;
+$inverse: #fff;
 $muted: #99abb4;
 $dark: #263238;
 $light: #f2f4f8;
@@ -78,7 +77,7 @@ $inverse-dark: #232a37;
 $dark-transparent: rgba(0, 0, 0, 0.05);
 
 /*Normal Color*/
-$white: #ffffff;
+$white: #fff;
 $red: #fb3a3a;
 $yellow: #a0aec4;
 $purple: #7460ee;
@@ -89,8 +88,8 @@ $megna: #00897b;
 $rgt: right;
 $lft: left;
 $border: rgba(120, 130, 140, 0.13);
-$table-border: #f3f1f1;
-$card-brd: #d7dfe3;
+$table-border: #fff;
+$card-brd: #fff;
 $dark-text: #848a96;
 $radius: 4px;
-$form-brd: #d9d9d9;
+$form-brd: #fff;
