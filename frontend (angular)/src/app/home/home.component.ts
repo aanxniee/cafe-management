@@ -13,11 +13,13 @@ import { SignupComponent } from '../signup/signup.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private dialog:MatDialog, private userServices:UserService, private router:Router) { }
+  constructor(private dialog:MatDialog, 
+    private userServices:UserService, 
+    private router:Router) { }
 
   ngOnInit(): void {
     this.userServices.checkToken().subscribe((response:any)=>{
-      this.router.navigate(['cafe/dashboard']);
+      this.router.navigate(['/cafe/dashboard']);
     }, (error:any)=>{
       console.log(error);
     })

@@ -10,7 +10,9 @@ import { GlobalConstants } from '../shared/global-constants';
 })
 export class RouteGuardService {
 
-  constructor(public auth:AuthService, public router:Router, private snackBarService:SnackbarService) { }
+  constructor(public auth:AuthService, 
+    public router:Router, 
+    private snackBarService:SnackbarService) { }
 
   canActivate(router:ActivatedRouteSnapshot):boolean {
     let expectedRoleArray = router.data;
@@ -18,10 +20,10 @@ export class RouteGuardService {
 
     const token:any = localStorage.getItem("token");
 
-    var tokenPayLoad:any;
+    var tokenPayload:any;
     
     try {
-      tokenPayLoad = jwt_decode(token);
+      tokenPayload = jwt_decode(token);
     } catch(err) {
       localStorage.clear();
       this.router.navigate(['/']);
@@ -30,13 +32,13 @@ export class RouteGuardService {
     let expectedRole = '';
 
     for (let i = 0; i < expectedRoleArray.length; i++) {
-      if (expectedRoleArray[i] == tokenPayLoad.role) {
-        expectedRole = tokenPayLoad.role;
+      if (expectedRoleArray[i] == tokenPayload.role) {
+        expectedRole = tokenPayload.role;
       }
     }
 
-    if (tokenPayLoad.role == 'user' || tokenPayLoad.role == 'admin') {
-      if (this.auth.isAuthenticated() && tokenPayLoad.role == expectedRole) {
+    if (tokenPayload.role == 'user' || tokenPayload.role == 'admin') {
+      if (this.auth.isAuthenticated() && tokenPayload.role == expectedRole) {
         return true;
       }
       this.snackBarService.openSnackBar(GlobalConstants.unauthorized, GlobalConstants.error);
