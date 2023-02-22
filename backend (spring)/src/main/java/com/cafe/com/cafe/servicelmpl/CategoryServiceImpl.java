@@ -80,7 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
                 return new ResponseEntity<List<Category>>(categoryDao.getAllCategory(), HttpStatus.OK);
             }
             // return all categories
-            return new ResponseEntity<List<Category>>(categoryDao.findAll(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<Category>>(categoryDao.findAll(), HttpStatus.OK);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
