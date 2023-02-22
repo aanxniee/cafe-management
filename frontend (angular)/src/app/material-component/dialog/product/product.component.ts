@@ -3,38 +3,62 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CategoryService } from 'src/app/services/category.service';
+import { ProductService } from 'src/app/services/product.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
-export class CategoryComponent implements OnInit {
-  onAddCategory = new EventEmitter();
-  onEditCategory = new EventEmitter();
-  categoryForm:any = FormGroup;
+export class ProductComponent implements OnInit {
+  onAddProduct= new EventEmitter();
+  onEditProduct = new EventEmitter();
+  productForm:any = FormGroup;
   dialogAction:any = "Add";
   action:any = "Add";
+  categories:any = [];
   responseMessage:any;
-
+  
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData:any,
-    private formBuilder:FormBuilder,
-    private categoryService:CategoryService,
-    private snackbarService:SnackbarService,
-    public dialogRef:MatDialogRef<CategoryComponent>,
-    private ngxService:NgxUiLoaderService) { }
+  private formBuilder:FormBuilder,
+  private productService:ProductService,
+  private snackbarService:SnackbarService,
+  public dialogRef:MatDialogRef<ProductComponent>,
+  private ngxService:NgxUiLoaderService,
+  private categoryService:CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryForm = this.formBuilder.group({
-      name:[null, [Validators.required]],
+    this.productForm = this.formBuilder.group({
+      name:[null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
+      categoryId:[null, [Validators.required]],
+      price:[null, [Validators.required]],
+      description:[null, [Validators.required]]
     });
     if (this.dialogData.action === 'Edit') {
       this.dialogAction = "Edit";
       this.action = "Update";
-      this.categoryForm.patchValue(this.dialogData.data);
+      this.productForm.patchValue(this.dialogData.data);
     }
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.categoryService.getCategories().subscribe((response:any)=>{
+      this.categories = response;
+    }, (error)=> {
+      this.dialogRef.close();
+      console.log(error);
+
+      if (error.error?.message) {
+        this.responseMessage = error.error?.message;
+      }
+      else {
+        this.responseMessage = GlobalConstants.genericError;
+      }
+      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+    })  
   }
 
   handleSubmit() {
@@ -46,14 +70,17 @@ export class CategoryComponent implements OnInit {
   }
 
   add() {
-    var formData = this.categoryForm.value;
+    var formData = this.productForm.value;
     var data = {
-      name: formData.name
+      name: formData.name,
+      categoryId: formData.categoryId,
+      price: formData.price,
+      description: formData.description
     }
 
-    this.categoryService.add(data).subscribe((response:any)=>{
+    this.productService.add(data).subscribe((response:any)=>{
       this.dialogRef.close();
-      this.onAddCategory.emit();
+      this.onAddProduct.emit();
       this.responseMessage = response.message;
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error)=> {
@@ -71,15 +98,18 @@ export class CategoryComponent implements OnInit {
   }
 
   edit() {
-    var formData = this.categoryForm.value;
+    var formData = this.productForm.value;
     var data = {
       id: this.dialogData.data.id,
-      name: formData.name
+      name: formData.name,
+      categoryId: formData.categoryId,
+      price: formData.price,
+      description: formData.description
     }
 
-    this.categoryService.update(data).subscribe((response:any)=>{
+    this.productService.update(data).subscribe((response:any)=>{
       this.dialogRef.close();
-      this.onEditCategory.emit();
+      this.onEditProduct.emit();
       this.responseMessage = response.message;
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error)=> {
