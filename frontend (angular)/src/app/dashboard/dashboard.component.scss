@@ -35,8 +35,9 @@ html {
 
 .column {
   float: left;
-  width: 33.3333%;
-  padding-left:12px;
+  width: 31%;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .card {
@@ -53,6 +54,7 @@ html {
   
 .container {
   padding: 7px;
+  border-radius: 5px;
 }
   
 .container::after, .row::after {
@@ -71,6 +73,7 @@ html {
   outline: 0;
   display: inline-block;
   padding: 8px;
+  font-family: Poppins, sans-serif;
   color: #fff;
   background-color: #a1887f;
   text-align: center;
