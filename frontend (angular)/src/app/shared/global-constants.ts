@@ -11,5 +11,5 @@ export class GlobalConstants {
     public static contactNumberRegex:string = "^[e0-9]{10,10}$";
 
     // error
-    public static error:string = "Error";
+    public static error:string = "error";
 }

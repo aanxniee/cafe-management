@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
     private ngxService:NgxUiLoaderService) { }
 
   ngOnInit(): void {
+    // fields within the form
     this.signupForm = this.formBuilder.group({
       name:[null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       email:[null, [Validators.required, Validators.pattern(GlobalConstants.emailegex)]],
@@ -35,6 +36,7 @@ export class SignupComponent implements OnInit {
     })
   }
 
+  // ensures that the password and confirmPassword matches
   validateSubmit() {
     if (this.signupForm.controls['password'].value != this.signupForm.controls['confirmPassword'].value) {
       return true;
@@ -54,6 +56,7 @@ export class SignupComponent implements OnInit {
       password: formData.password
     }
 
+    // sends data from the form to the backend
     this.userService.signup(data).subscribe((response:any)=> {
       this.ngxService.stop();
       this.dialogRef.close();

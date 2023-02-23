@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  url = environment.apiUrl;
+  url = environment.apiUrl; // link to backend
 
   constructor(private httpClient:HttpClient) { }
 

@@ -34,7 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
     var data = {
       email: formData.email
     }
-
+    // send values from form to backend
     this.userService.forgotPassword(data).subscribe((response:any)=> {
       this.ngxService.stop();
       this.dialogRef.close();

@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-
   handleSubmit() {
     this.ngxService.start();
     var formData = this.loginForm.value;
@@ -39,11 +38,13 @@ export class LoginComponent implements OnInit {
       email: formData.email,
       password: formData.password
     }
-
+    // send values from form to backend
     this.userService.login(data).subscribe((response:any)=> {
       this.ngxService.stop();
       this.dialogRef.close();
+      // save the JWT token to local storage
       localStorage.setItem('token', response.token);
+      // if login is successful, route to the dashboard
       this.router.navigate(['/cafe/dashboard']);
     }, (error)=> {
       this.ngxService.stop();
