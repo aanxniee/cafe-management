@@ -8,6 +8,7 @@ export class AuthService {
 
   constructor(private router:Router) { }
 
+  // checks if token exists
   public isAuthenticated():boolean {
     const token = localStorage.getItem('token');
     console.log(token);

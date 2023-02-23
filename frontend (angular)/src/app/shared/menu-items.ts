@@ -7,6 +7,7 @@ export interface Menu {
     role:string;
 }
 
+// pages
 const MENUITEMS = [
     {state:'dashboard', name:'Dashboard', type:'link', role:''},
     {state:'category', name:'Manage Categories', type:'link', role:'admin'},

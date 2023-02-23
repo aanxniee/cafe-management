@@ -15,6 +15,7 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
 
   constructor(private router:Router) {}
 
+  // blocks unauthorized requests
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem('token');
     if (token) {
@@ -27,6 +28,7 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
       catchError((err)=>{
         if (err instanceof HttpErrorResponse) {
           console.log(err.url);
+          // if unauthorized, redirect to home page
           if (err.status === 401 || err.status === 403) {
             if (this.router.url === '/') {}
             else {

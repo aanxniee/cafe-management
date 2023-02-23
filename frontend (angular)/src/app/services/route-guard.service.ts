@@ -18,12 +18,11 @@ export class RouteGuardService {
     let expectedRoleArray = router.data;
     expectedRoleArray = expectedRoleArray.expectedRole;
 
-    const token:any = localStorage.getItem("token");
-
+    const token:any = localStorage.getItem("token"); // retrieve token from local storage
     var tokenPayload:any;
     
     try {
-      tokenPayload = jwt_decode(token);
+      tokenPayload = jwt_decode(token); // parse the token using jwt_decode
     } catch(err) {
       localStorage.clear();
       this.router.navigate(['/']);
@@ -31,12 +30,14 @@ export class RouteGuardService {
 
     let expectedRole = '';
 
+    // extract the role from the token
     for (let i = 0; i < expectedRoleArray.length; i++) {
       if (expectedRoleArray[i] == tokenPayload.role) {
         expectedRole = tokenPayload.role;
       }
     }
 
+    // if the token's role is allowed to access the feature --> return true
     if (tokenPayload.role == 'user' || tokenPayload.role == 'admin') {
       if (this.auth.isAuthenticated() && tokenPayload.role == expectedRole) {
         return true;
