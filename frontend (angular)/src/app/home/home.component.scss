@@ -1,5 +1,4 @@
 * {
-  box-sizing: border-box;
   background-color: #a1887f;
 }
 
@@ -8,14 +7,18 @@ body {
   margin: 0;
 }
 
+.container {
+  height: 100%;
+}
+
 .navbar {
   display: flex;
   background-color: #a1887f;
-  padding: 3%;
+  padding: 2.5%;
 }
 
 li {
-  color: #EBEAEA;
+  color: white;
   text-align: center;
   transition: all .3s ease-in-out;
 }
@@ -25,6 +28,7 @@ li:hover {
 }
 
 .logo {
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,12 +37,7 @@ li:hover {
 }
 
 .logo:hover {
-  transform: scale(1.05);
-}
-
-.row {  
-  display: flex;
-  flex-wrap: wrap;
+  transform: scale(1.04);
 }
 
 .nav-btns {
@@ -47,36 +46,11 @@ li:hover {
   justify-content: center;
 }
 
-.side {
-  flex: 30%;
-  background-color: #EBEAEA;
-  padding: 20px;
-}
-
-.main {
-  flex: 70%;
-  background-color: #EBEAEA;
-  padding: 15px;
-}
-
 .footer {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  color: #EBEAEA;
+  color: white;
   background: #a1887f;
-}
-
-.column {
-  flex: 25%;
-  padding: 20px;
-}
-
-.wrapper {
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  background-color: #a1887f;
 }
 
 nav {
@@ -101,25 +75,18 @@ ul {
 
 a {
   text-decoration: none;
-  color: #EBEAEA;
+  color: white;
   position: relative;
   font-size: 1.25em;
   cursor: pointer;
 }
 
-.sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-}
-
 .bg-image {
   background-image: url("../../assets/img/cover.svg");
-  height: 93.9%; 
+  height:80%; 
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 75%;
 }
 
 @media (max-width: 1024px) {
@@ -169,13 +136,61 @@ a {
 }
 
 @media screen and (max-width: 992px) {
-  .column {
-    flex: 50%;
+  .navbar {   
+    flex-direction: column;
+  }
+
+  .nav-btns {
+    padding: 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  a.logo {
+    font-size: 1.7em;
+  }
+
+  a {
+    font-size: 1.4em;
+  }
+
+  .bg-image {
+    border: 1px solid red;
+    height:60%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 120%;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .row, .navbar {   
+  .navbar {   
     flex-direction: column;
+  }
+
+  .nav-btns {
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+
+  a.logo {
+    font-size: 1.25em;
+  }
+
+  a {
+    font-size: 1em;
+  }
+
+  .bg-image {
+    border: 1px solid red;
+    height:65%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 150%;
   }
 }

@@ -53,6 +53,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
+  // interceptor manipulates server side requests through authentication
+  // multi:true --> provide multiple values for a single token in a dependency injection
   providers: [HttpClientModule, {provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
