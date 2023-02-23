@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { BillService } from 'src/app/services/bill.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
@@ -99,5 +100,24 @@ export class ViewBillComponent implements OnInit {
     })
   }
 
-  handleDownloadAction(values:any) {}
+  handleDownloadAction(values:any) {
+    this.ngxService.start();
+    var data = {
+      name: values.name,
+      email: values.email,
+      uuid: values.uuid,
+      contactNumber: values.contactNumber,
+      paymentMethod: values.paymentMethod,
+      totalAmount: values.total.toString(),
+      productDetails: values.productDetail
+    }
+    this.downloadFile(values.uuid, data);
+  }
+
+  downloadFile(fileName:string, data:any) {
+    this.billService.getPdf(data).subscribe((response:any)=>{
+      saveAs(response, fileName+'.pdf');
+      this.ngxService.stop()
+    })
+  }
 }
