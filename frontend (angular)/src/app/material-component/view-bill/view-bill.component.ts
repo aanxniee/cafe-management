@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { BillService } from 'src/app/services/bill.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
+import { ViewBillProductsComponent } from '../dialog/view-bill-products/view-bill-products.component';
 
 @Component({
   selector: 'app-view-bill',
@@ -46,4 +47,20 @@ export class ViewBillComponent implements OnInit {
     })
   }
 
+  applyFilter(event:Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  handleViewAction(values:any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      data:values
+    }
+    dialogConfig.width = "100%";
+    const dialogRef = this.dialog.open(ViewBillProductsComponent);
+    this.router.events.subscribe(()=>{
+      dialogRef.close();
+    })
+  }
 }
