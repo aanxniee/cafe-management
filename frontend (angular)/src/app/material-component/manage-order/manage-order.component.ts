@@ -16,7 +16,7 @@ import { GlobalConstants } from 'src/app/shared/global-constants';
 })
 export class ManageOrderComponent implements OnInit {
   displayedColumns: string[] = ['name', 'category', 'price', 'quantity', 'edit'];
-  dataSource:any;
+  dataSource:any = [];
   manageOrderForm:any = FormGroup;
   categories:any = [];
   products:any = [];
@@ -102,8 +102,8 @@ export class ManageOrderComponent implements OnInit {
     }) 
   }
 
-  setQuantity(value:any) {
-    var temp = this.manageOrderForm.controls['total'].value;
+  setQuantity(val:any) {
+    var temp = this.manageOrderForm.controls['quantity'].value;
     if (temp > 0) {
       this.manageOrderForm.controls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.controls['price'].value);
     }
@@ -114,7 +114,7 @@ export class ManageOrderComponent implements OnInit {
   }
 
   validateProductAdd() {
-    if (this.manageOrderForm.controls['total'].value === 0 || this.manageOrderForm['total'].value === null || this.manageOrderForm['quantity'].value <= 0) {
+    if (this.manageOrderForm.controls['total'].value === 0 || this.manageOrderForm.controls['total'].value === null || this.manageOrderForm.controls['quantity'].value <= 0) {
       return true;
     }
     else {
@@ -133,7 +133,9 @@ export class ManageOrderComponent implements OnInit {
 
   add() {
     var formData = this.manageOrderForm.value;
+    console.log(formData);
     var productName = this.dataSource.find((e:{id:number}) => e.id === formData.product.id);
+    console.log(productName);
     if (productName === undefined) {
       this.totalAmount = this.totalAmount + formData.total;
       this.dataSource.push(
