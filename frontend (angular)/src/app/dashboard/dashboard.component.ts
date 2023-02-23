@@ -23,6 +23,7 @@ export class DashboardComponent implements AfterViewInit {
 	}
 
 	dashboardData() {
+		// retrieve data from database via backend
 		this.dashboardService.getDetails().subscribe((response:any)=>{
 			this.ngxService.stop();
 			this.data = response;
