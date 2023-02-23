@@ -62,7 +62,7 @@ export class ManageCategoryComponent implements OnInit {
     this.router.events.subscribe(()=>{
       dialogRef.close();
     })
-
+    // onAddCategory function in CategoryComponent
     const sub = dialogRef.componentInstance.onAddCategory.subscribe((response)=>{
       this.tableData();
     })
@@ -79,7 +79,7 @@ export class ManageCategoryComponent implements OnInit {
     this.router.events.subscribe(()=>{
       dialogRef.close();
     })
-
+        // onEditCategory function in CategoryComponent
     const sub = dialogRef.componentInstance.onEditCategory.subscribe((response)=>{
       this.tableData();
     })

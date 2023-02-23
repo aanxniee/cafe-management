@@ -12,8 +12,8 @@ import { GlobalConstants } from 'src/app/shared/global-constants';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  onAddCategory = new EventEmitter();
-  onEditCategory = new EventEmitter();
+  onAddCategory = new EventEmitter(); // when user clicks add button
+  onEditCategory = new EventEmitter(); // when user clicks edit button
   categoryForm:any = FormGroup;
   dialogAction:any = "Add";
   action:any = "Add";
@@ -50,7 +50,7 @@ export class CategoryComponent implements OnInit {
     var data = {
       name: formData.name
     }
-
+    // pass value from form to backend
     this.categoryService.add(data).subscribe((response:any)=>{
       this.dialogRef.close();
       this.onAddCategory.emit();
@@ -76,7 +76,7 @@ export class CategoryComponent implements OnInit {
       id: this.dialogData.data.id,
       name: formData.name
     }
-
+    // pass value from form to backend
     this.categoryService.update(data).subscribe((response:any)=>{
       this.dialogRef.close();
       this.onEditCategory.emit();
