@@ -58,9 +58,12 @@ export class ViewBillComponent implements OnInit {
       data:values
     }
     dialogConfig.width = "100%";
-    const dialogRef = this.dialog.open(ViewBillProductsComponent);
+    const dialogRef = this.dialog.open(ViewBillProductsComponent, dialogConfig);
     this.router.events.subscribe(()=>{
       dialogRef.close();
     })
   }
+
+  handleDeleteAction(values:any) {}
+  handleDownloadAction(values:any) {}
 }
