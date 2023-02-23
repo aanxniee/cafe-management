@@ -7,7 +7,6 @@
         </button>
     </mat-toolbar-row>
 </mat-toolbar>
-
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="productForm">
         <div fxFlex fxLayout="column">
@@ -55,7 +54,6 @@
         </div>
     </form>
 </mat-dialog-content>
-
 <mat-dialog-actions align="end">
     <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(productForm.valid && productForm.dirty)">
         Confirm

@@ -44,13 +44,13 @@ export class ProductComponent implements OnInit {
     this.getCategories();
   }
 
+  // retrieves the category of each product
   getCategories() {
     this.categoryService.getCategories().subscribe((response:any)=>{
       this.categories = response;
     }, (error)=> {
       this.dialogRef.close();
       console.log(error);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -77,7 +77,7 @@ export class ProductComponent implements OnInit {
       price: formData.price,
       description: formData.description
     }
-
+    // pass values in form to the backend
     this.productService.add(data).subscribe((response:any)=>{
       this.dialogRef.close();
       this.onAddProduct.emit();
@@ -86,7 +86,6 @@ export class ProductComponent implements OnInit {
     }, (error)=> {
       this.dialogRef.close();
       console.error(error);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -106,7 +105,7 @@ export class ProductComponent implements OnInit {
       price: formData.price,
       description: formData.description
     }
-
+    // pass values in form to the backend
     this.productService.update(data).subscribe((response:any)=>{
       this.dialogRef.close();
       this.onEditProduct.emit();

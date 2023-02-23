@@ -17,7 +17,6 @@ import { ProductComponent } from '../dialog/product/product.component';
 export class ManageProductComponent implements OnInit {
   displayedColumns: string[] = ['name', 'categoryName', 'description', 'price', 'edit'];
   dataSource:any;
-  //length:any;
   responseMessage:any;
 
   constructor(private productService:ProductService,
@@ -32,13 +31,13 @@ export class ManageProductComponent implements OnInit {
   }
 
   tableData() {
+    // retrieve products from db in the backend
     this.productService.getProducts().subscribe((response:any)=>{
       this.ngxService.stop();
       this.dataSource = new MatTableDataSource(response);
     }, (error:any)=>{
       this.ngxService.stop();
       console.log(error.error?.message);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -81,7 +80,6 @@ export class ManageProductComponent implements OnInit {
     this.router.events.subscribe(()=>{
       dialogRef.close();
     })
-
     const sub = dialogRef.componentInstance.onEditProduct.subscribe((response)=>{
       this.tableData();
     })
@@ -104,15 +102,15 @@ export class ManageProductComponent implements OnInit {
   }
 
   deleteProduct(id:any) {
+    // delete by calling request to the backend
     this.productService.delete(id).subscribe((response:any)=>{
       this.ngxService.stop();
-      this.tableData();
+      this.tableData(); // reload table data after deletion
       this.responseMessage = response?.message;
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error:any)=>{
       this.ngxService.stop();
       console.log(error.error?.message);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -123,13 +121,13 @@ export class ManageProductComponent implements OnInit {
     })
   }
 
+  // updates the status of the product
   onChange(status:any, id:any) {
     this.ngxService.start();
     var data = {
       status: status.toString(),
       id:id
     }
-
     this.productService.updateStatus(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.responseMessage = response?.message;
