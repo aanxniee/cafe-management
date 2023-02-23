@@ -28,17 +28,17 @@ export class ViewBillComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxService.start();
-    this.tableData();
+    this.tableData(); // load data from db
   }
 
   tableData() {
+    // retrieve the bills from the backend
     this.billService.getBills().subscribe((response:any)=>{
       this.ngxService.stop();
       this.dataSource = new MatTableDataSource(response);
     }, (error:any)=>{
       this.ngxService.stop();
       console.log(error.error?.message);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -54,6 +54,7 @@ export class ViewBillComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  // open the bill for viewing via ViewBillProductsComponent
   handleViewAction(values:any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
@@ -81,9 +82,10 @@ export class ViewBillComponent implements OnInit {
   }
 
   deleteBill(id:any) {
+    // delete from backend via the bill's id
     this.billService.delete(id).subscribe((response:any)=>{
       this.ngxService.stop();
-      this.tableData();
+      this.tableData(); // reload the table
       this.responseMessage = response?.message;
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error:any)=>{
@@ -102,6 +104,7 @@ export class ViewBillComponent implements OnInit {
 
   handleDownloadAction(values:any) {
     this.ngxService.start();
+    // retrieve the attributes
     var data = {
       name: values.name,
       email: values.email,
@@ -111,7 +114,7 @@ export class ViewBillComponent implements OnInit {
       totalAmount: values.total.toString(),
       productDetails: values.productDetail
     }
-    this.downloadFile(values.uuid, data);
+    this.downloadFile(values.uuid, data); // pass through downloadFile
   }
 
   downloadFile(fileName:string, data:any) {
