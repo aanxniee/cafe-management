@@ -50,7 +50,7 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: formData.newPassword,
       confirmPassword: formData.confirmPassword
     }
-
+    // pass values from form to backend
     this.userService.changePassword(data).subscribe((response:any)=> {
       this.ngxService.stop();
       this.dialogRef.close();
@@ -67,5 +67,4 @@ export class ChangePasswordComponent implements OnInit {
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
-
 }

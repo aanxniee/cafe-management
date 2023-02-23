@@ -22,5 +22,4 @@ export class ConfirmationComponent implements OnInit {
   handleChangeAction() {
     this.onEmitStatusChange.emit();
   }
-
 }
