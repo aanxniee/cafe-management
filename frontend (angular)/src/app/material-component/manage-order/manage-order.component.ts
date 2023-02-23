@@ -34,6 +34,7 @@ export class ManageOrderComponent implements OnInit {
   ngOnInit(): void {
     this.ngxService.start();
     this.getCategories();
+    // required data from the user
     this.manageOrderForm = this.formBuilder.group({
       name:[null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       email:[null, [Validators.required, Validators.pattern(GlobalConstants.emailegex)]],
@@ -65,7 +66,9 @@ export class ManageOrderComponent implements OnInit {
     })  
   }
 
+  // retrieves products based on a category
   getProductsByCategory(value:any) {
+    // get data from backend
     this.productService.getProductsByCategory(value.id).subscribe((response:any)=>{
       this.products = response;
       console.log(response);
@@ -84,9 +87,11 @@ export class ManageOrderComponent implements OnInit {
     }) 
   }
 
+  // retrieve product data
   getProductDetails(value:any) {
     this.productService.getById(value.id).subscribe((response:any)=>{
       this.price = response.price;
+      // initialize the form values when user selects a product
       this.manageOrderForm.controls['price'].setValue(response.price);
       this.manageOrderForm.controls['quantity'].setValue('1');
       this.manageOrderForm.controls['total'].setValue(this.price*1);
@@ -102,6 +107,7 @@ export class ManageOrderComponent implements OnInit {
     }) 
   }
 
+  // if user changes the quantity of the product, update the total price accordingly
   setQuantity(val:any) {
     var temp = this.manageOrderForm.controls['quantity'].value;
     if (temp > 0) {
@@ -113,6 +119,7 @@ export class ManageOrderComponent implements OnInit {
     }
   }
 
+  // ensure that all fields are filled out
   validateProductAdd() {
     if (this.manageOrderForm.controls['total'].value === 0 || this.manageOrderForm.controls['total'].value === null || this.manageOrderForm.controls['quantity'].value <= 0) {
       return true;
@@ -138,6 +145,7 @@ export class ManageOrderComponent implements OnInit {
     console.log(productName);
     if (productName === undefined) {
       this.totalAmount = this.totalAmount + formData.total;
+      // save the data from the form
       this.dataSource.push(
         {
           id:formData.product.id,
@@ -158,12 +166,13 @@ export class ManageOrderComponent implements OnInit {
 
   handleDeleteAction(values:any, element:any) {
     this.totalAmount = this.totalAmount - element.total;
-    this.dataSource.splice(values, 1);
+    this.dataSource.splice(values, 1); // remove the bill at tthe specified index
     this.dataSource = [...this.dataSource];
   }
 
   submitAction() {
     var formData = this.manageOrderForm.value;
+    // save the data into a JSON format
     var data = {
       name: formData.name,
       email: formData.email,
@@ -173,8 +182,9 @@ export class ManageOrderComponent implements OnInit {
       productDetails: JSON.stringify(this.dataSource)
     }
     this.ngxService.start();
+    // pass the format to the backend
     this.billService.generateReport(data).subscribe((response:any)=>{
-      this.downloadFile(response?.uuid);
+      this.downloadFile(response?.uuid); // download the file
       this.manageOrderForm.reset();
       this.dataSource = [];
       this.totalAmount = 0;
@@ -194,9 +204,9 @@ export class ManageOrderComponent implements OnInit {
     var data = {
       uuid: fileName
     }
-
+    // get the pdf via the uuid
     this.billService.getPdf(data).subscribe((response:any)=>{
-      saveAs(response, fileName+'.pdf');
+      saveAs(response, fileName+'.pdf'); // saveAs() saves to the computer
       this.ngxService.stop()
     })
   }
