@@ -12,7 +12,6 @@ import { GlobalConstants } from 'src/app/shared/global-constants';
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
-
   displayedColumns: string[] = ['name', 'email', 'contactNumber', 'status'];
   dataSource:any;
   responseMessage:any;
@@ -27,13 +26,13 @@ export class ManageUserComponent implements OnInit {
   }
 
   tableData() {
+    // retrieve all users from db
     this.userService.getUsers().subscribe((response:any)=>{
       this.ngxService.stop();
       this.dataSource = new MatTableDataSource(response);
     }, (error:any)=>{
       this.ngxService.stop();
       console.log(error.error?.message);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -56,6 +55,7 @@ export class ManageUserComponent implements OnInit {
       id: id
     }
     console.log(data);
+    // update status of user to the backend
     this.userService.update(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.responseMessage = response?.message;
@@ -63,7 +63,6 @@ export class ManageUserComponent implements OnInit {
     }, (error:any)=>{
       this.ngxService.stop();
       console.log(error.error?.message);
-
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
