@@ -3,7 +3,7 @@ body { margin: 0; font-family: Poppins, sans-serif; }
 
 //responsibe table
 @media(max-width: 800px) {
-  .responsive_table {
+  .responsive-table {
     overflow-x: auto !important;
   }
   
@@ -37,7 +37,7 @@ body { margin: 0; font-family: Poppins, sans-serif; }
   width: 40vw !important;
   min-width: 90% !important;
   max-width: 100vw !important;
-  margin-top: 70px !important;
+  margin-bottom: 70px !important;
   padding: 20px !important;
 }
 

@@ -13,7 +13,7 @@ export class SnackbarService {
     if (action === "error") {
       this.snackBar.open(message, '', {
         horizontalPosition: 'center',
-        verticalPosition: 'top',
+        verticalPosition: 'bottom',
         duration: 2300,
         panelClass: ['red-snackbar']
       });
@@ -21,7 +21,7 @@ export class SnackbarService {
     else {
       this.snackBar.open(message, '', {
         horizontalPosition: 'center',
-        verticalPosition: 'top',
+        verticalPosition: 'bottom',
         duration: 2300,
         panelClass: ['green-snackbar']
       });
