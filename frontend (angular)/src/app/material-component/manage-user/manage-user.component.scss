@@ -2,21 +2,6 @@
     position: relative;
 }
 
-.float-right {
-    border: 2px solid white;
-    color: white;
-    background-color: #a1887f;
-    position: absolute;
-    right: 20px;
-    top: 11px;
-    transition: all 0.3s ease-in-out;
-}
-
-.float-right:hover {
-    color: #a1887f;
-    background-color: #fff;
-}
-
 mat-card {
     background-color: #a1887f;
     color: white;
@@ -42,16 +27,6 @@ table {
     width: 100%;
     border: 2px solid #a1887f;
     border-radius: 5px;
-}
-
-::ng-deep.highlight {
-    color: white;
-    background: #a1887f;
-}
-
-mat-slide-toggle {
-    margin-left: 8px;
-    transform: scale(0.8);
 }
 
 .spacer {

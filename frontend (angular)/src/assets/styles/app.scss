@@ -44,27 +44,6 @@ a.link {
   height: auto;
 }
 
-html body .mdi:before,
-html body .mdi-set {
-  line-height: initial;
-}
-
-.shadow-none {
-  box-shadow: none !important;
-}
-.ml-auto {
-  margin-left: auto;
-}
-.m-auto {
-  margin: auto;
-}
-.mr-auto {
-  margin-right: auto;
-}
-.rounded {
-  border-radius: $radius;
-}
-
 h1,
 h2,
 h3,
@@ -107,34 +86,9 @@ h6 {
   font-weight: 400;
 }
 
-html,
-body {
-  .display-5 {
-    font-size: 3rem;
-  }
-  .display-6 {
-    font-size: 36px;
-  }
-}
-
 .box {
   border-radius: $radius;
   padding: 10px;
-}
-
-html body {
-  .dl {
-    display: inline-block;
-  }
-  .db {
-    display: block;
-  }
-  .op-5 {
-    opacity: 0.5;
-  }
-  .op-3 {
-    opacity: 0.3;
-  }
 }
 
 .no-wrap {
@@ -346,88 +300,6 @@ html body {
   .m-b-40 {
     margin-bottom: 40px;
   }
-}
-
-html body {
-  .vt {
-    vertical-align: top;
-  }
-
-  .vm {
-    vertical-align: middle;
-  }
-
-  .vb {
-    vertical-align: bottom;
-  }
-}
-
-.op-5 {
-  opacity: 0.5;
-}
-
-html body {
-  .font-bold {
-    font-weight: 700;
-  }
-
-  .font-normal {
-    font-weight: normal;
-  }
-
-  .font-light {
-    font-weight: 300;
-  }
-  .font-medium {
-    font-weight: 500;
-  }
-  .font-16 {
-    font-size: 16px;
-  }
-  .font-14 {
-    font-size: 14px;
-  }
-  .font-10 {
-    font-size: 10px;
-  }
-  .font-12 {
-    font-size: 12px;
-  }
-  .font-18 {
-    font-size: 18px;
-  }
-  .font-20 {
-    font-size: 20px;
-  }
-}
-
-html body {
-  .b-0 {
-    border: none;
-  }
-  .b-r {
-    border-right: 1px solid $border;
-  }
-  .b-l {
-    border-left: 1px solid $border;
-  }
-  .b-b {
-    border-bottom: 1px solid $border;
-  }
-  .b-t {
-    border-top: 1px solid $border;
-  }
-  .b-all {
-    border: 1px solid $border;
-  }
-}
-
-.hide {
-  display: none;
-}
-
-.radius {
-  border-radius: $radius;
 }
 
 .btn-block {
