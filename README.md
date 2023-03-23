@@ -36,13 +36,13 @@ https://user-images.githubusercontent.com/63011927/221094363-e5fe264e-8ca3-40de-
 
 https://user-images.githubusercontent.com/63011927/221094364-1e718a06-5239-4a8e-83d1-db1cb36b36ec.mov
 
-## Deployment - Docker
+## Docker
 There are 2 Dockerfiles to build the images for the frontend and backend:
 - ```/frontend (angular)/Dockerfile```
 - ```/backend (spring)/Dockerfile```
 
 To build the Dockerfiles, navigate into the desired folder and run the corresponding command:
-```docker build -t cafe-management/frontend:[version] .```
-```docker build -t cafe-management/backend:[version] .```
+- ```docker build -t cafe-management/frontend:[version] .```
+- ```docker build -t cafe-management/backend:[version] .```
 
 To run the application, run ```docker-compose up``` in the root directory.
