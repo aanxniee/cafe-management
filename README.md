@@ -16,7 +16,7 @@ All data is submitted in the front-end via forms, sent to the backend through PO
 ## Tech Stack
 Front-end: Angular/Typescript with Material UI                                                                                                             
 Backend: Spring Boot/Java                                                                                                                                   
-Database: SQL
+Database: MySQL
 
 https://user-images.githubusercontent.com/63011927/221094357-8145ea54-862a-4ce8-8bea-2bad14aa6a3d.mov
 
